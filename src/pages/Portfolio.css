@@ -1,0 +1,231 @@
+/* Solo Leveling Portfolio Styles */
+:root {
+  --sl-bg: #0a061a;
+  --sl-card-bg: rgba(18, 12, 36, 0.8);
+  --sl-accent: #bd00ff;
+  --sl-accent-glow: rgba(189, 0, 255, 0.5);
+  --sl-border: rgba(189, 0, 255, 0.3);
+  --sl-text: #ffffff;
+  --sl-text-muted: #94a3b8;
+  --sl-health: #ff4d4d;
+  --sl-mana: #4d94ff;
+  --sl-xp: #bd00ff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--sl-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sl-border);
+  border-radius: 10px;
+  border: 2px solid var(--sl-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sl-accent);
+}
+
+.sl-container {
+  background-color: var(--sl-bg);
+  color: var(--sl-text);
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.sl-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.sl-card {
+  background: var(--sl-card-bg);
+  border: 1px solid var(--sl-border);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  position: relative;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.sl-card:hover {
+  border-color: var(--sl-accent);
+  box-shadow: 0 0 20px var(--sl-accent-glow);
+}
+
+.sl-title {
+  font-family: 'Outfit', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.sl-glow-text {
+  text-shadow: 0 0 10px var(--sl-accent-glow);
+}
+
+.sl-avatar-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid var(--sl-accent);
+  box-shadow: 0 0 30px var(--sl-accent-glow);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.sl-avatar-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sl-stat-label {
+  color: var(--sl-text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.sl-stat-value {
+  color: var(--sl-text);
+  font-weight: 700;
+}
+
+.sl-progress-bar-container {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.sl-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 1s ease-out;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.sl-skill-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.sl-skill-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(189, 0, 255, 0.2);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sl-accent);
+}
+
+.sl-circular-xp {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sl-circular-circle {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 10;
+}
+
+.sl-circular-progress {
+  fill: none;
+  stroke: var(--sl-accent);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+.sl-nav {
+  margin-bottom: 3rem;
+  padding: 1rem 2rem;
+  border-radius: 99px;
+  border: 1px solid var(--sl-border);
+  background: rgba(18, 12, 36, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px);
+}
+
+.sl-nav-link {
+  color: var(--sl-text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 99px;
+  transition: all 0.3s ease;
+}
+
+.sl-nav-link:hover, .sl-nav-link.active {
+  color: var(--sl-text);
+  background: rgba(189, 0, 255, 0.2);
+}
+
+/* Background effects */
+.sl-bg-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--sl-accent-glow) 0%, transparent 70%);
+  z-index: -1;
+  filter: blur(100px);
+  opacity: 0.3;
+  animation: bgFloat 10s infinite alternate ease-in-out;
+}
+
+@keyframes bgFloat {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.2) translate(50px, 50px); }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(189, 0, 255, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(189, 0, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(189, 0, 255, 0); }
+}
+
+.sl-card {
+  perspective: 1000px;
+}
+
+.sl-card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+@media (max-width: 1024px) {
+  .sl-grid {
+    grid-template-columns: 1fr;
+  }
+}
