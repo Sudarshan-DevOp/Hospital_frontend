@@ -9,10 +9,11 @@ export const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
+    email: '',
+    password1: '',
+    password2: '',
     first_name: '',
     last_name: '',
-    email: '',
-    password: '',
     role: 'PATIENT'
   })
   const navigate = useNavigate()
@@ -34,7 +35,7 @@ export const RegisterPage = () => {
         toast.success('Account created successfully! Please sign in.')
         navigate('/login')
       } else {
-        const errorMsg = data.email?.[0] || data.password?.[0] || data.detail || 'Registration failed'
+        const errorMsg = data.email?.[0] || data.password1?.[0] || data.password?.[0] || data.detail || 'Registration failed'
         toast.error(errorMsg)
       }
     } catch (err) {
@@ -138,8 +139,8 @@ export const RegisterPage = () => {
             </div>
             <input 
               type={showPassword ? "text" : "password"}
-              name="password"
-              value={formData.password}
+              name="password1"
+              value={formData.password1}
               onChange={handleChange}
               placeholder="Min. 8 characters"
               className="w-full pl-12 pr-12 py-3.5 bg-slate-50/80 dark:bg-slate-800/80 border-2 border-transparent focus:border-teal-500 focus:bg-white dark:focus:bg-slate-700 rounded-2xl outline-none transition-all font-medium text-slate-900 dark:text-white placeholder:text-slate-400 text-sm"
@@ -153,6 +154,24 @@ export const RegisterPage = () => {
             >
               {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
+          </div>
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-xs font-bold text-slate-700 dark:text-slate-300 ml-1 uppercase tracking-widest">Confirm Password</label>
+          <div className="relative group">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-teal-600 transition-colors">
+              <Lock size={16} />
+            </div>
+            <input 
+              type={showPassword ? "text" : "password"}
+              name="password2"
+              value={formData.password2}
+              onChange={handleChange}
+              placeholder="Confirm password"
+              className="w-full pl-12 pr-12 py-3.5 bg-slate-50/80 dark:bg-slate-800/80 border-2 border-transparent focus:border-teal-500 focus:bg-white dark:focus:bg-slate-700 rounded-2xl outline-none transition-all font-medium text-slate-900 dark:text-white placeholder:text-slate-400 text-sm"
+              required
+            />
           </div>
         </div>
 

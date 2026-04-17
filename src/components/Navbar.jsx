@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Stethoscope, Moon, Sun, X, Menu } from 'lucide-react'
+import { Stethoscope, X, Menu } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
@@ -15,13 +15,13 @@ const Button = ({ children, variant = 'primary', className = '', to, ...props })
     outline: 'border-2 border-primary-600 text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20',
     secondary: 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm border border-slate-200 dark:border-slate-700'
   }
-  
+
   const combinedClasses = cn('px-6 py-3 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 active:scale-95', variants[variant], className);
-  
+
   if (to) {
     return <Link to={to} className={combinedClasses} {...props}>{children}</Link>
   }
-  
+
   return (
     <button className={combinedClasses} {...props}>
       {children}
@@ -31,16 +31,8 @@ const Button = ({ children, variant = 'primary', className = '', to, ...props })
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDark, setIsDark] = useState(document.documentElement.classList.contains('dark'))
   const location = useLocation()
 
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [isDark])
 
   const navItems = [
     { name: 'About', path: '/about' },
@@ -62,9 +54,9 @@ export const Navbar = () => {
 
           <div className="hidden lg:flex items-center gap-10">
             {navItems.map((item, idx) => (
-              <Link 
-                key={item.name} 
-                to={item.path} 
+              <Link
+                key={item.name}
+                to={item.path}
                 className={cn(
                   "text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-sm px-1 py-2",
                   location.pathname === item.path ? "text-primary-600 dark:text-primary-400 font-black" : ""
@@ -76,12 +68,7 @@ export const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setIsDark(!isDark)}
-              className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-90"
-            >
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
+
             <Button to="/login" variant="outline" className="hidden sm:flex dark:border-slate-700 dark:text-slate-300">Login</Button>
             <Button to="/contact" className="hidden sm:flex bg-gradient-to-r from-primary-600 to-teal-600">Contact Us</Button>
             <button className="lg:hidden p-2 text-slate-600 dark:text-slate-400" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -93,7 +80,7 @@ export const Navbar = () => {
 
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -101,9 +88,9 @@ export const Navbar = () => {
           >
             <div className="flex flex-col gap-6">
               {navItems.map(item => (
-                <Link 
-                  key={item.name} 
-                  to={item.path} 
+                <Link
+                  key={item.name}
+                  to={item.path}
                   className="text-3xl font-black text-slate-900 dark:text-white"
                   onClick={() => setIsMenuOpen(false)}
                 >
